@@ -1,0 +1,3 @@
+import com.kotlinstudy.nowinjun.configureComposeAndroid
+
+configureComposeAndroid()
