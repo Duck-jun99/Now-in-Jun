@@ -5,8 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.contentColorFor
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.kotlinstudy.designsystem.CleanArchitectureTheme
+import com.kotlinstudy.project.navigation.ProjectRoute
+import com.kotlinstudy.project.navigation.navigateProject
+import com.kotlinstudy.project.navigation.projectNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -20,22 +27,33 @@ class MainActivity : ComponentActivity() {
                 color = MaterialTheme.colorScheme.background
             ) {
 
-                /*
+
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = LoginRoute.route
+                    startDestination = ProjectRoute.route
                 ) {
-                    loginNavGraph(
-                        onSignInClick = { navController.navigateSignIn() }
+                    projectNavGraph(
+                        onSettingClick = { navController.navigateProject() }
                     )
+                    /*
                     signInNavGraph(
                         onLoginClick = { navController.navigateLogin() }
                     )
+                    
+                     */
                 }
 
-                 */
+
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    CleanArchitectureTheme {
+
     }
 }

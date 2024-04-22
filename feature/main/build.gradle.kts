@@ -7,8 +7,8 @@ android {
 }
 
 dependencies {
-    //implementation(projects.feature.signin)
-    //implementation(projects.feature.login)
+    implementation(projects.feature.project)
+    //implementation(projects.feature.setting)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -16,4 +16,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.kotlinx.immutable)
+
+    implementation(libs.androidx.junit.ktx)
 }

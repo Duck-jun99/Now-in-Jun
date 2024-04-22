@@ -10,5 +10,6 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.junit.ktx)
     //implementation(projects.core.model)
 }
