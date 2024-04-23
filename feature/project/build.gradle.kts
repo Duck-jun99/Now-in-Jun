@@ -6,8 +6,7 @@ plugins {
 android {
     namespace = "com.nowinjun.project"
 }
-dependencies {
 
-
-    implementation(libs.androidx.junit.ktx)
+kapt {
+    correctErrorTypes = true
 }

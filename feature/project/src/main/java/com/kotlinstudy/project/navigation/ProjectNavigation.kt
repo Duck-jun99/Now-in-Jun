@@ -9,16 +9,7 @@ fun NavController.navigateProject() {
     navigate(ProjectRoute.route)
 }
 
-fun NavGraphBuilder.projectNavGraph(
-    onSettingClick: (Int) -> Unit
-) {
-    composable(route = ProjectRoute.route) {
-        ProjectScreen(
-            onSettingClick = onSettingClick
-        )
-    }
-}
 
 object ProjectRoute {
-    const val route = "project"
+    const val route = "Project"
 }

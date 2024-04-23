@@ -4,9 +4,5 @@ plugins {
 }
 
 android {
-    namespace = "com.nowinjun.setting"
-}
-
-kapt {
-    correctErrorTypes = true
+    namespace = "com.nowinjun.introduce"
 }

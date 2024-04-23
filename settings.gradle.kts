@@ -14,6 +14,8 @@ dependencyResolutionManagement {
     }
 }
 
+
+
 rootProject.name = "nowinjun"
 include(
     ":app",
@@ -25,7 +27,7 @@ include(
 
     ":feature:main",
     ":feature:project",
-    //":feature:setting"
-
+    ":feature:setting",
+    ":feature:introduce"
 
 )

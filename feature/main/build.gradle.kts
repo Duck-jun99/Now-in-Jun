@@ -8,7 +8,8 @@ android {
 
 dependencies {
     implementation(projects.feature.project)
-    //implementation(projects.feature.setting)
+    implementation(projects.feature.setting)
+    implementation(projects.feature.introduce)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
