@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="introMySelf">
+        안녕하세요! Android 개발자를 꿈꾸고 있는 최병준입니다.\n
+        실력있는 개발자가 되기 위해 항상 고민하고 노력합니다.
+    </string>
+
+    <string name="stack">
+        Stack
+    </string>
+</resources>

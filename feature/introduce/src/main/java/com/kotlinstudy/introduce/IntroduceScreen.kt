@@ -24,6 +24,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -31,11 +32,14 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.kotlinstudy.designsystem.CleanArchitectureTheme
@@ -43,118 +47,45 @@ import com.nowinjun.introduce.R
 
 @Composable
 fun IntroduceScreen(
-
-    //viewModel: LoginViewModel = hiltViewModel()
+    viewModel: IntroduceViewModel = hiltViewModel()
 ) {
-    //val emailState = viewModel.userEmail.value
-    //val passwordState = viewModel.userPassword.value
 
     val snackBarHostState = remember { SnackbarHostState() }
     SnackbarHost(hostState = snackBarHostState)
     LaunchedEffect(key1 = true) {
 
-        /*
-        viewModel.eventFlow.collectLatest { event ->
-            when (event) {
-                is LoginViewModel.UiEvent.ShowSnackBar -> {
-                    snackBarHostState.showSnackbar(
-                        message = event.message
-                    )
-                }
-                is LoginViewModel.UiEvent.Login -> {
-                    snackBarHostState.showSnackbar(
-                        message = "로그인을 성공했습니다."
-                    )
-                    TODO("로그인을 성공하고 난 이후의 처리")
-                }
-            }
-        }
-
-         */
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp)
+            .padding(20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(100.dp))
-
-
-        Spacer(modifier = Modifier.height(100.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(
-                text = AnnotatedString("Project"),
-                style = MaterialTheme.typography.headlineLarge,
-                color = Color.DarkGray
-            )
-            Text(
-                text = "  /  ",
-                style = MaterialTheme.typography.headlineLarge,
-                color = Color.DarkGray,
-            )
-            Text(
-                text = AnnotatedString("Setting"),
-                style = MaterialTheme.typography.headlineLarge.copy(
-                    color = Color.Gray
-                ),
-            )
-        }
-
-        /*
         Spacer(modifier = Modifier.height(30.dp))
-        OutlinedTextField(
-            value = emailState,
-            label = { Text(text = "Email") },
-            placeholder = { Text(text = "이메일을 입력해 주세요.") },
-            onValueChange = { newValue ->
-                viewModel.onEvent(LoginEvent.EnteredEmail(newValue))
-            },
-            modifier = Modifier.fillMaxWidth(),
-            textStyle = MaterialTheme.typography.bodyLarge
-        )
-        Spacer(modifier = Modifier.height(15.dp))
-        OutlinedTextField(
-            value = passwordState,
-            label = { Text(text = "Password") },
-            placeholder = { Text(text = "비밀번호를 입력해 주세요") },
-            onValueChange = { newValue ->
-                viewModel.onEvent(LoginEvent.EnteredPassword(newValue))
-            },
-            modifier = Modifier.fillMaxWidth(),
-            textStyle = MaterialTheme.typography.bodyLarge
-        )
-        Spacer(modifier = Modifier.height(15.dp))
-        Button(
-            onClick = {
-                viewModel.onEvent(LoginEvent.Login)
-            },
-            modifier = Modifier.wrapContentSize().fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
-            contentPadding = PaddingValues(15.dp),
-            shape = RoundedCornerShape(4.dp)
-        ) {
-            Text(text = "Login", fontSize = 20.sp)
-        }
 
-         */
+        ProfileImage(imageResource = R.drawable.me, modifier = Modifier)
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        IntroduceText()
+
     }
 
 }
 
 @Composable
-fun ProfileImage(source: String, modifier: Modifier = Modifier) {
+fun ProfileImage(imageResource: Int, modifier: Modifier = Modifier) {
     // image bitmap
     val bitmap: MutableState<Bitmap?> = remember { mutableStateOf(null) }
     val imageModifier: Modifier = modifier
-        .size(50.dp, 50.dp)
+        .size(150.dp, 150.dp)
         .clip(CircleShape)
+        .fillMaxSize()
 
     Glide.with(LocalContext.current)
         .asBitmap()
-        .load(source)
+        .load(imageResource)
         .into(object : CustomTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 bitmap.value = resource
@@ -163,24 +94,95 @@ fun ProfileImage(source: String, modifier: Modifier = Modifier) {
             override fun onLoadCleared(placeholder: Drawable?) {}
         })
 
-    // bitmap 이 있으면
     bitmap.value?.asImageBitmap()?.let { fetchedBitmap ->
         Image(
             bitmap = fetchedBitmap,
             contentDescription = null,
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.FillWidth,
             modifier = imageModifier
-        )
+        )   //bitmap이 없다면
     } ?: Image(
         painter = painterResource(id = R.drawable.me),
         contentDescription = null,
-        contentScale = ContentScale.Fit,
+        contentScale = ContentScale.FillWidth,
         modifier = imageModifier
     )
+}
+
+@Composable
+fun IntroduceText(){
+
+    Column (
+        modifier = Modifier.fillMaxSize()
+    ){
+        Text(
+            text = stringResource(id = R.string.introMySelf),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.DarkGray
+        )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(
+            text = stringResource(id = R.string.stack),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.DarkGray
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ){
+            Text(
+                text = AnnotatedString("Kotlin  "),
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.DarkGray
+            )
+            Text(
+                text = AnnotatedString("Java  "),
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.DarkGray
+            )
+            Text(
+                text = AnnotatedString("Android"),
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.DarkGray
+            )
+        }
+    }
+
 }
 
 @Preview(showBackground = true)
 @Composable
 fun IntroducePreview() {
-    IntroduceScreen()
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.height(30.dp))
+
+        //Start: Preview를 위해 Glide를 뺌.
+
+        val imageModifier: Modifier = Modifier
+            .size(150.dp, 150.dp)
+            .clip(CircleShape)
+            .fillMaxSize()
+
+        Image(
+            painter = painterResource(id = R.drawable.me),
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth,
+            modifier = imageModifier
+        )
+
+        //End
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        IntroduceText()
+    }
 }
