@@ -1,3 +1,4 @@
+import com.kotlinstudy.nowinjun.configureAndroidGlide
 import com.kotlinstudy.nowinjun.configureCoroutineAndroid
 import com.kotlinstudy.nowinjun.configureHiltAndroid
 import com.kotlinstudy.nowinjun.configureKotest
@@ -11,3 +12,4 @@ configureKotlinAndroid()
 configureKotest()
 configureCoroutineAndroid()
 configureHiltAndroid()
+configureAndroidGlide()

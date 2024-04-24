@@ -22,5 +22,9 @@ gradlePlugin {
             id = "nowinjun.android.room"
             implementationClass = "com.kotlinstudy.nowinjun.AndroidRoomPlugin"
         }
+        register("androidGlide"){
+            id = "nowinjun.android.glide"
+            implementationClass = "com.kotlinstudy.nowinjun.AndroidGlidePlugin"
+        }
     }
 }
